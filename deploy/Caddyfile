@@ -1,5 +1,8 @@
 {
   admin off
+  # Chrome on Windows may omit SNI when it connects to a LAN IP. Without a
+  # default name Caddy aborts the TLS handshake with ERR_SSL_PROTOCOL_ERROR.
+  default_sni {$SITE_HOST:localhost}
 }
 
 (conference) {
