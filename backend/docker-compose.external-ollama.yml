@@ -1,0 +1,25 @@
+services:
+  # Локальная Ollama выключена по умолчанию. Для её запуска используйте
+  # `docker compose --profile local-ollama ...`.
+  ollama-init:
+    profiles: [local-ollama]
+
+  ollama:
+    profiles: [local-ollama]
+
+  api:
+    environment:
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+    networks: [runtime, ollama_access]
+
+  worker:
+    environment:
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+    networks: [runtime, ollama_access]
+    depends_on:
+      ollama:
+        condition: service_healthy
+        required: false
+
+networks:
+  ollama_access: {}

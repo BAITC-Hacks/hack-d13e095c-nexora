@@ -1,0 +1,18 @@
+name: local-meeting-minutes
+
+include:
+  - path:
+      - ./backend/docker-compose.yml
+      - ./backend/docker-compose.external-ollama.yml
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-5173}:5173"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped

@@ -13,6 +13,37 @@ npm run dev
 
 Откройте адрес, напечатанный сервером. Для записи нужен микрофон и разрешение браузера; работает на HTTPS и localhost.
 
+## Запуск frontend и backend через Docker
+
+Для полного локального стека нужен Docker с Compose v2. Перед первым запуском
+примите условия модели `pyannote/speaker-diarization-community-1` в Hugging Face,
+создайте read-токен и выполните:
+
+```sh
+cp backend/.env.example backend/.env
+# Впишите HF_TOKEN и адрес Ollama на другом ПК в backend/.env:
+# OLLAMA_URL=http://192.168.1.100:11434
+docker compose --env-file backend/.env up --build -d
+```
+
+Frontend: <http://localhost:5173>. Swagger API: <http://localhost:8000/docs>.
+Первый запуск скачивает несколько гигабайт моделей и занимает больше времени.
+Локальный контейнер Ollama по умолчанию не запускается. Удалённая Ollama должна
+слушать LAN-интерфейс, а порт 11434 должен быть доступен с этого компьютера.
+
+Проверка состояния и просмотр логов:
+
+```sh
+docker compose --env-file backend/.env ps
+docker compose --env-file backend/.env logs -f bootstrap ollama-init api worker frontend
+```
+
+Остановка с сохранением базы, записей и моделей:
+
+```sh
+docker compose --env-file backend/.env down
+```
+
 ## Проверка
 
 ```sh
