@@ -1,18 +1,131 @@
 name: local-meeting-minutes
 
-include:
-  - path:
-      - ./backend/docker-compose.yml
-      - ./backend/docker-compose.external-ollama.yml
+x-server-env: &server-env
+  DATABASE_URL: postgresql+asyncpg://meetings:${POSTGRES_PASSWORD:-meetings}@db:5432/meetings
+  STORAGE_DIR: /app/storage
+  OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+  OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen3:8b}
+  OLLAMA_TIMEOUT_SECONDS: ${OLLAMA_TIMEOUT_SECONDS:-120}
+  OLLAMA_KEEP_ALIVE: 5m
+  SPEECH_URL: ${SPEECH_URL:-http://speech:8001}
+  SPEECH_API_KEY: ${SPEECH_API_KEY:-}
+  CONFERENCE_ACCESS_KEY: ${CONFERENCE_ACCESS_KEY:-}
+  API_KEY: ${API_KEY:-}
+  RTC_ICE_SERVERS: ${RTC_ICE_SERVERS:-[]}
+  LIVE_ANALYSIS_INTERVAL: ${LIVE_ANALYSIS_INTERVAL:-30}
+  MEETING_TIMEZONE: ${MEETING_TIMEZONE:-Asia/Almaty}
+  HF_HUB_OFFLINE: "1"
+  HF_HUB_DISABLE_TELEMETRY: "1"
 
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "127.0.0.1:${FRONTEND_PORT:-5173}:5173"
-    depends_on:
-      api:
-        condition: service_healthy
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: meetings
+      POSTGRES_USER: meetings
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-meetings}
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    networks: [runtime]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U meetings -d meetings"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
     restart: unless-stopped
+
+  migrate:
+    build: {context: ./backend, target: api}
+    environment: *server-env
+    command: [alembic, upgrade, head]
+    networks: [runtime]
+    depends_on:
+      db: {condition: service_healthy}
+    restart: "no"
+
+  api:
+    build: {context: ./backend, target: api}
+    environment: *server-env
+    volumes: [meeting_storage:/app/storage]
+    networks: [runtime, ai_access]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    ports: ["127.0.0.1:${API_PORT:-8000}:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import os,urllib.request; r=urllib.request.Request('http://127.0.0.1:8000/api/v1/health/ready',headers={'X-API-Key':os.getenv('API_KEY','')}); urllib.request.urlopen(r,timeout=4)"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+
+  live-worker:
+    build: {context: ./backend, target: api}
+    command: [python, -m, app.live_worker]
+    environment: *server-env
+    volumes: [meeting_storage:/app/storage]
+    networks: [runtime, ai_access]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+    stop_grace_period: 20s
+
+  frontend:
+    build: {context: ., dockerfile: Dockerfile}
+    networks: [runtime]
+    restart: unless-stopped
+
+  gateway:
+    image: caddy:2.10.2-alpine
+    environment:
+      SITE_HOST: ${SITE_HOST:-localhost}
+    ports:
+      - "0.0.0.0:${HTTPS_PORT:-8443}:443"
+      - "127.0.0.1:${FRONTEND_PORT:-5173}:8080"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [runtime, ingress]
+    depends_on:
+      api: {condition: service_healthy}
+      frontend: {condition: service_started}
+    restart: unless-stopped
+
+  speech-bootstrap:
+    profiles: [speech]
+    build: {context: ./backend, target: speech-bootstrap}
+    environment:
+      SPEECH_REPO: ${SPEECH_REPO:-Systran/faster-whisper-large-v3}
+      SPEECH_REVISION: ${SPEECH_REVISION:-main}
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    volumes: [speech_models:/models]
+    networks: [setup]
+    restart: "no"
+
+  speech:
+    profiles: [speech]
+    build: {context: ./backend, target: speech}
+    environment:
+      SPEECH_MODEL_DIR: /models/whisper
+      SPEECH_API_KEY: ${SPEECH_API_KEY:-}
+      AI_DEVICE: ${AI_DEVICE:-cpu}
+      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+      WHISPER_CPU_THREADS: ${WHISPER_CPU_THREADS:-4}
+    volumes: [speech_models:/models:ro]
+    networks: [runtime]
+    depends_on:
+      speech-bootstrap: {condition: service_completed_successfully}
+    restart: unless-stopped
+
+networks:
+  runtime: {internal: true}
+  ai_access: {}
+  ingress: {}
+  setup: {}
+volumes:
+  postgres_data: {}
+  meeting_storage: {}
+  speech_models: {}
+  caddy_data: {}
+  caddy_config: {}

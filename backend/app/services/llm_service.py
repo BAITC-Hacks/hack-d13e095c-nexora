@@ -56,7 +56,7 @@ class LLMService:
             "stream": False,
             "think": False,
             "format": schema,
-            "keep_alive": 0,
+            "keep_alive": self.settings.ollama_keep_alive,
             "options": {
                 "temperature": 0,
                 "num_ctx": self.settings.llm_context_tokens,

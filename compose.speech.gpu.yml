@@ -1,0 +1,8 @@
+# Docker + NVIDIA Container Toolkit on the ASR PC.
+services:
+  speech:
+    build: {context: ./backend, target: speech-gpu}
+    environment:
+      AI_DEVICE: cuda
+      WHISPER_COMPUTE_TYPE: float16
+    gpus: all

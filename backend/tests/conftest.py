@@ -6,6 +6,7 @@ import httpx
 import pytest
 from sqlalchemy import event, text
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+from sqlalchemy.pool import NullPool
 
 from app.config import Settings
 from app.db.base import Base
@@ -22,7 +23,9 @@ async def env(tmp_path):
         admin = create_async_engine(url)
         async with admin.begin() as connection:
             await connection.execute(text(f'CREATE SCHEMA "{schema}"'))
-        engine = create_async_engine(url, connect_args={"server_settings": {"search_path": schema}})
+        engine = create_async_engine(
+            url, poolclass=NullPool, connect_args={"server_settings": {"search_path": schema}}
+        )
     else:
         engine = create_async_engine(f"sqlite+aiosqlite:///{tmp_path / 'test.db'}")
 

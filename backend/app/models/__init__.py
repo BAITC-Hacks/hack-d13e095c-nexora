@@ -1,4 +1,5 @@
 from app.models.job import Job
+from app.models.conference import AudioChunk, Conference, ConferenceMember, ConferenceMessage
 from app.models.meeting import Meeting
 from app.models.participant import Participant
 from app.models.speaker import Speaker

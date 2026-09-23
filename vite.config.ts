@@ -52,6 +52,7 @@ export default defineConfig(async () => {
 
   return {
     server: {
+      proxy: { "/api/v1/conferences": { target: "http://127.0.0.1:8000", ws: true } },
       ...(managedLinux ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] } : {}),
       ...(isCodexSeatbeltSandbox ? { watch: { useFsEvents: false, usePolling: true } } : {}),
     },

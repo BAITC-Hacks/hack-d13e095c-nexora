@@ -13,3 +13,8 @@ outputs
 work
 *.log
 *.tsbuildinfo
+
+.env*
+*.crt
+*.key
+.impeccable

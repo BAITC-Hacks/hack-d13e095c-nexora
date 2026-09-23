@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T11:44:45.909515+00:00",
+  "title": "Design System: Протокол",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary",
+        "tonalRamp": [
+          "oklch(15.00% 0.2152 262.88)",
+          "oklch(26.43% 0.2152 262.88)",
+          "oklch(37.86% 0.2152 262.88)",
+          "oklch(49.29% 0.2152 262.88)",
+          "oklch(60.71% 0.2152 262.88)",
+          "oklch(72.14% 0.2152 262.88)",
+          "oklch(83.57% 0.2152 262.88)",
+          "oklch(95.00% 0.2152 262.88)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Primary Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.2172 264.38)",
+          "oklch(26.43% 0.2172 264.38)",
+          "oklch(37.86% 0.2172 264.38)",
+          "oklch(49.29% 0.2172 264.38)",
+          "oklch(60.71% 0.2172 264.38)",
+          "oklch(72.14% 0.2172 264.38)",
+          "oklch(83.57% 0.2172 264.38)",
+          "oklch(95.00% 0.2172 264.38)"
+        ]
+      },
+      "start": {
+        "role": "secondary",
+        "displayName": "Start",
+        "tonalRamp": [
+          "oklch(15.00% 0.1865 39.45)",
+          "oklch(26.43% 0.1865 39.45)",
+          "oklch(37.86% 0.1865 39.45)",
+          "oklch(49.29% 0.1865 39.45)",
+          "oklch(60.71% 0.1865 39.45)",
+          "oklch(72.14% 0.1865 39.45)",
+          "oklch(83.57% 0.1865 39.45)",
+          "oklch(95.00% 0.1865 39.45)"
+        ]
+      },
+      "start-hover": {
+        "role": "secondary",
+        "displayName": "Start Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.1747 38.48)",
+          "oklch(26.43% 0.1747 38.48)",
+          "oklch(37.86% 0.1747 38.48)",
+          "oklch(49.29% 0.1747 38.48)",
+          "oklch(60.71% 0.1747 38.48)",
+          "oklch(72.14% 0.1747 38.48)",
+          "oklch(83.57% 0.1747 38.48)",
+          "oklch(95.00% 0.1747 38.48)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.0029 264.54)",
+          "oklch(26.43% 0.0029 264.54)",
+          "oklch(37.86% 0.0029 264.54)",
+          "oklch(49.29% 0.0029 264.54)",
+          "oklch(60.71% 0.0029 264.54)",
+          "oklch(72.14% 0.0029 264.54)",
+          "oklch(83.57% 0.0029 264.54)",
+          "oklch(95.00% 0.0029 264.54)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88)",
+          "oklch(26.43% 0.0000 89.88)",
+          "oklch(37.86% 0.0000 89.88)",
+          "oklch(49.29% 0.0000 89.88)",
+          "oklch(60.71% 0.0000 89.88)",
+          "oklch(72.14% 0.0000 89.88)",
+          "oklch(83.57% 0.0000 89.88)",
+          "oklch(95.00% 0.0000 89.88)"
+        ]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.0119 264.36)",
+          "oklch(26.43% 0.0119 264.36)",
+          "oklch(37.86% 0.0119 264.36)",
+          "oklch(49.29% 0.0119 264.36)",
+          "oklch(60.71% 0.0119 264.36)",
+          "oklch(72.14% 0.0119 264.36)",
+          "oklch(83.57% 0.0119 264.36)",
+          "oklch(95.00% 0.0119 264.36)"
+        ]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Muted Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.0242 261.71)",
+          "oklch(26.43% 0.0242 261.71)",
+          "oklch(37.86% 0.0242 261.71)",
+          "oklch(49.29% 0.0242 261.71)",
+          "oklch(60.71% 0.0242 261.71)",
+          "oklch(72.14% 0.0242 261.71)",
+          "oklch(83.57% 0.0242 261.71)",
+          "oklch(95.00% 0.0242 261.71)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0087 264.52)",
+          "oklch(26.43% 0.0087 264.52)",
+          "oklch(37.86% 0.0087 264.52)",
+          "oklch(49.29% 0.0087 264.52)",
+          "oklch(60.71% 0.0087 264.52)",
+          "oklch(72.14% 0.0087 264.52)",
+          "oklch(83.57% 0.0087 264.52)",
+          "oklch(95.00% 0.0087 264.52)"
+        ]
+      },
+      "input-border": {
+        "role": "neutral",
+        "displayName": "Input Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0148 264.49)",
+          "oklch(26.43% 0.0148 264.49)",
+          "oklch(37.86% 0.0148 264.49)",
+          "oklch(49.29% 0.0148 264.49)",
+          "oklch(60.71% 0.0148 264.49)",
+          "oklch(72.14% 0.0148 264.49)",
+          "oklch(83.57% 0.0148 264.49)",
+          "oklch(95.00% 0.0148 264.49)"
+        ]
+      },
+      "accent": {
+        "role": "neutral",
+        "displayName": "Accent",
+        "tonalRamp": [
+          "oklch(15.00% 0.0173 264.49)",
+          "oklch(26.43% 0.0173 264.49)",
+          "oklch(37.86% 0.0173 264.49)",
+          "oklch(49.29% 0.0173 264.49)",
+          "oklch(60.71% 0.0173 264.49)",
+          "oklch(72.14% 0.0173 264.49)",
+          "oklch(83.57% 0.0173 264.49)",
+          "oklch(95.00% 0.0173 264.49)"
+        ]
+      },
+      "accent-foreground": {
+        "role": "neutral",
+        "displayName": "Accent Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.1844 262.28)",
+          "oklch(26.43% 0.1844 262.28)",
+          "oklch(37.86% 0.1844 262.28)",
+          "oklch(49.29% 0.1844 262.28)",
+          "oklch(60.71% 0.1844 262.28)",
+          "oklch(72.14% 0.1844 262.28)",
+          "oklch(83.57% 0.1844 262.28)",
+          "oklch(95.00% 0.1844 262.28)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus",
+        "tonalRamp": [
+          "oklch(15.00% 0.1340 265.04)",
+          "oklch(26.43% 0.1340 265.04)",
+          "oklch(37.86% 0.1340 265.04)",
+          "oklch(49.29% 0.1340 265.04)",
+          "oklch(60.71% 0.1340 265.04)",
+          "oklch(72.14% 0.1340 265.04)",
+          "oklch(83.57% 0.1340 265.04)",
+          "oklch(95.00% 0.1340 265.04)"
+        ]
+      },
+      "stage": {
+        "role": "neutral",
+        "displayName": "Stage",
+        "tonalRamp": [
+          "oklch(15.00% 0.0157 269.06)",
+          "oklch(26.43% 0.0157 269.06)",
+          "oklch(37.86% 0.0157 269.06)",
+          "oklch(49.29% 0.0157 269.06)",
+          "oklch(60.71% 0.0157 269.06)",
+          "oklch(72.14% 0.0157 269.06)",
+          "oklch(83.57% 0.0157 269.06)",
+          "oklch(95.00% 0.0157 269.06)"
+        ]
+      },
+      "stage-toolbar": {
+        "role": "neutral",
+        "displayName": "Stage Toolbar",
+        "tonalRamp": [
+          "oklch(15.00% 0.0127 264.26)",
+          "oklch(26.43% 0.0127 264.26)",
+          "oklch(37.86% 0.0127 264.26)",
+          "oklch(49.29% 0.0127 264.26)",
+          "oklch(60.71% 0.0127 264.26)",
+          "oklch(72.14% 0.0127 264.26)",
+          "oklch(83.57% 0.0127 264.26)",
+          "oklch(95.00% 0.0127 264.26)"
+        ]
+      },
+      "stage-muted": {
+        "role": "neutral",
+        "displayName": "Stage Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.0216 261.76)",
+          "oklch(26.43% 0.0216 261.76)",
+          "oklch(37.86% 0.0216 261.76)",
+          "oklch(49.29% 0.0216 261.76)",
+          "oklch(60.71% 0.0216 261.76)",
+          "oklch(72.14% 0.0216 261.76)",
+          "oklch(83.57% 0.0216 261.76)",
+          "oklch(95.00% 0.0216 261.76)"
+        ]
+      },
+      "destructive": {
+        "role": "neutral",
+        "displayName": "Destructive",
+        "tonalRamp": [
+          "oklch(15.00% 0.1793 21.80)",
+          "oklch(26.43% 0.1793 21.80)",
+          "oklch(37.86% 0.1793 21.80)",
+          "oklch(49.29% 0.1793 21.80)",
+          "oklch(60.71% 0.1793 21.80)",
+          "oklch(72.14% 0.1793 21.80)",
+          "oklch(83.57% 0.1793 21.80)",
+          "oklch(95.00% 0.1793 21.80)"
+        ]
+      },
+      "destructive-hover": {
+        "role": "neutral",
+        "displayName": "Destructive Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.1532 21.37)",
+          "oklch(26.43% 0.1532 21.37)",
+          "oklch(37.86% 0.1532 21.37)",
+          "oklch(49.29% 0.1532 21.37)",
+          "oklch(60.71% 0.1532 21.37)",
+          "oklch(72.14% 0.1532 21.37)",
+          "oklch(83.57% 0.1532 21.37)",
+          "oklch(95.00% 0.1532 21.37)"
+        ]
+      },
+      "badge-background": {
+        "role": "neutral",
+        "displayName": "Badge Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.0115 264.51)",
+          "oklch(26.43% 0.0115 264.51)",
+          "oklch(37.86% 0.0115 264.51)",
+          "oklch(49.29% 0.0115 264.51)",
+          "oklch(60.71% 0.0115 264.51)",
+          "oklch(72.14% 0.0115 264.51)",
+          "oklch(83.57% 0.0115 264.51)",
+          "oklch(95.00% 0.0115 264.51)"
+        ]
+      },
+      "badge-foreground": {
+        "role": "neutral",
+        "displayName": "Badge Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.0769 262.23)",
+          "oklch(26.43% 0.0769 262.23)",
+          "oklch(37.86% 0.0769 262.23)",
+          "oklch(49.29% 0.0769 262.23)",
+          "oklch(60.71% 0.0769 262.23)",
+          "oklch(72.14% 0.0769 262.23)",
+          "oklch(83.57% 0.0769 262.23)",
+          "oklch(95.00% 0.0769 262.23)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default readable text."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Primary and secondary actions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Supporting labels and navigation."
+      },
+      "clock": {
+        "displayName": "Clock",
+        "purpose": "Schedule clock; tabular numerals."
+      }
+    },
+    "shadows": [
+      {
+        "name": "workspace-flat",
+        "value": "none",
+        "purpose": "Primary buttons and main workspace panels."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-transition",
+        "value": "background 0.18s ease, color 0.18s ease, border-color 0.18s ease",
+        "purpose": "Button state changes; disabled under reduced motion."
+      },
+      {
+        "name": "launcher-transition",
+        "value": "background 0.18s, transform 0.18s",
+        "purpose": "Launcher hover lift of 3px; disabled under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1100px"
+      },
+      {
+        "name": "stacked-workspace",
+        "value": "800px"
+      },
+      {
+        "name": "phone",
+        "value": "500px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary button from the implemented meeting workspace.",
+      "html": "<button class=\"ds-button-primary\">Начать запись</button>",
+      "css": ".ds-button-primary{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);min-height:42px;border:1px solid transparent;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:550;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease;background:var(--primary, #2563eb);color:#fff;}.ds-button-primary:hover{background:#1d4ed8;}.ds-button-primary:focus-visible{outline:3px solid #7399ef;outline-offset:3px;}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary button from the implemented meeting workspace.",
+      "html": "<button class=\"ds-button-secondary\">Открыть</button>",
+      "css": ".ds-button-secondary{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);min-height:42px;border:1px solid transparent;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:550;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease;background:#fff;color:#2559be;border-color:#d7dfea;}.ds-button-secondary:hover{background:#edf3ff;}.ds-button-secondary:focus-visible{outline:3px solid #7399ef;outline-offset:3px;}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Stop button",
+      "kind": "button",
+      "refersTo": "button-stop",
+      "description": "Stop button from the implemented meeting workspace.",
+      "html": "<button class=\"ds-button-stop\">Остановить</button>",
+      "css": ".ds-button-stop{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);min-height:42px;border:1px solid transparent;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:550;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease;background:var(--destructive, #b42332);color:#fff;min-height:44px;padding:10px 14px;font-size:13px;}.ds-button-stop:hover{background:#921b28;}.ds-button-stop:focus-visible{outline:3px solid #7399ef;outline-offset:3px;}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Text field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Text field from the implemented meeting workspace.",
+      "html": "<input class=\"ds-input\" aria-label=\"Название совещания\" placeholder=\"Название совещания\" />",
+      "css": ".ds-input{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);background:var(--card,#fff);color:var(--foreground,#24272d);border:1px solid var(--input,#cdd2dc);border-radius:8px;padding:10px 12px;font-size:14px;}.ds-input::placeholder{color:var(--muted-foreground,#626a78)}.ds-input:focus{border-color:var(--primary,#2563eb)}.ds-input:focus-visible{outline:3px solid #7399ef;outline-offset:3px;}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Navigation destination",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "Navigation destination from the implemented meeting workspace.",
+      "html": "<button class=\"ds-nav\" aria-current=\"page\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg>Главная</button>",
+      "css": ".ds-nav{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);display:flex;flex-direction:column;align-items:center;gap:5px;min-width:88px;padding:10px 14px;border:0;border-radius:9px;font-size:12px;background:var(--accent,#edf3ff);color:var(--accent-foreground,#1e55c5);cursor:pointer;transition:background .18s ease}.ds-nav:hover{background:#f0f3f8}.ds-nav:focus-visible{outline:3px solid #7399ef;outline-offset:3px;}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Status badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Status badge from the implemented meeting workspace.",
+      "html": "<span class=\"ds-badge\">Демоданные</span>",
+      "css": ".ds-badge{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);display:inline-flex;align-items:center;gap:5px;padding:5px 9px;font-size:11px;font-weight:500;border-radius:5px;color:#637caa;background:#eff3fb;white-space:nowrap}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Document panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Document panel from the implemented meeting workspace.",
+      "html": "<section class=\"ds-panel\"><h2>Повестка совещания</h2><p>Обсуждение вопросов команды</p></section>",
+      "css": ".ds-panel{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);background:var(--card,#fff);color:var(--foreground,#24272d);border:1px solid var(--border,#e3e6ec);border-radius:12px;padding:24px;box-shadow:none}.ds-panel h2{font-size:15px;font-weight:650;margin:0 0 16px}.ds-panel p{font-size:13px;color:#414a59;margin:0}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    },
+    {
+      "name": "Start launcher",
+      "kind": "button",
+      "refersTo": "launcher-start",
+      "description": "Start launcher from the implemented meeting workspace.",
+      "html": "<button class=\"ds-launch\"><span class=\"ds-launch-icon\"><svg width=\"34\" height=\"34\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"9\" y=\"2\" width=\"6\" height=\"12\" rx=\"3\"/><path d=\"M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8\"/></svg></span><strong>Начать совещание</strong><small>Открыть экран записи</small></button>",
+      "css": ".ds-launch{font-family:var(--font-sans, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif);display:flex;flex-direction:column;align-items:center;gap:9px;background:transparent;padding:8px;border:0;color:#24272d;border-radius:14px;cursor:pointer}.ds-launch-icon{display:grid;place-items:center;width:86px;height:86px;border-radius:24px;background:#e85b24;color:#fff;margin-bottom:5px;transition:background .18s,transform .18s}.ds-launch:hover .ds-launch-icon{background:#c94715;transform:translateY(-3px)}.ds-launch:active .ds-launch-icon{transform:translateY(0)}.ds-launch:focus-visible{outline:3px solid #7399ef;outline-offset:3px;}.ds-launch strong{font-size:16px;font-weight:600}.ds-launch small{font-size:12px;color:#656d79}@media(prefers-reduced-motion:reduce){.ds-launch-icon{transition:none!important;transform:none!important}}@media(prefers-reduced-motion:reduce){button{transition:none;transform:none;}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Familiar Meeting Room",
+    "overview": "Протокол uses familiar Zoom-style desktop conventions: a cool, quiet workspace, clear blue controls, an orange meeting launcher, and a charcoal recording stage. System typography and generous action targets make starting a local recording immediately understandable.\n\nThe product keeps its own name and uses concise Russian labels. Recording state, unavailable microphone access, local storage, planned participants, and demonstration documents must remain legible at the point where they affect a decision.",
+    "keyCharacteristics": [
+      "Cool white and gray surfaces with blue navigation.",
+      "Orange start action and a dark recording stage.",
+      "Flat bordered panels, visible focus, and compact supporting text."
+    ],
+    "rules": [],
+    "dos": [
+      "Do keep recording state and the stop control unmistakable.",
+      "Do pair status color with a readable label.",
+      "Do preserve visible keyboard focus and reduced-motion behavior.",
+      "Do label planned participants, local recordings, and demonstration output accurately."
+    ],
+    "donts": [
+      "Don't imply shared calls, live remote participants, or actual audio transcription.",
+      "Don't add decorative imagery or replace the familiar meeting controls with a marketing layout.",
+      "Don't use the old warm olive visual direction."
+    ]
+  }
+}

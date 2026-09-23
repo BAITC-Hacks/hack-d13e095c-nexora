@@ -1,0 +1,25 @@
+# Standalone ASR on a second computer. Run with --profile speech (if applicable to root, not this file).
+name: meeting-speech
+services:
+  bootstrap:
+    build: {context: ./backend, target: speech-bootstrap}
+    environment:
+      SPEECH_REPO: ${SPEECH_REPO:-Systran/faster-whisper-large-v3}
+      SPEECH_REVISION: ${SPEECH_REVISION:-main}
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    volumes: [speech_models:/models]
+  speech:
+    build: {context: ./backend, target: speech}
+    environment:
+      SPEECH_MODEL_DIR: /models/whisper
+      SPEECH_API_KEY: ${SPEECH_API_KEY:?Set a shared SPEECH_API_KEY on both PCs}
+      AI_DEVICE: ${AI_DEVICE:-cpu}
+      WHISPER_COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+      WHISPER_CPU_THREADS: ${WHISPER_CPU_THREADS:-4}
+    ports: ["0.0.0.0:8001:8001"]
+    volumes: [speech_models:/models:ro]
+    depends_on:
+      bootstrap: {condition: service_completed_successfully}
+    restart: unless-stopped
+volumes:
+  speech_models: {}

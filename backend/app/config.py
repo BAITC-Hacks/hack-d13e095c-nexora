@@ -43,6 +43,14 @@ class Settings(BaseSettings):
     job_lease_seconds: int = Field(default=120, ge=30)
     job_max_attempts: int = Field(default=3, ge=1)
     api_key: str | None = None
+    conference_access_key: str | None = None
+    conference_max_peers: int = Field(default=8, ge=2, le=12)
+    rtc_ice_servers: list[dict] = []
+    speech_url: str = "http://speech:8001"
+    speech_api_key: str = ""
+    speech_timeout_seconds: int = Field(default=120, ge=5, le=600)
+    live_analysis_interval: int = Field(default=30, ge=10, le=300)
+    ollama_keep_alive: str = "5m"
     cors_origins: list[str] = ["http://localhost:3000", "http://localhost:5173"]
     pdf_font_path: Path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
     pdf_bold_font_path: Path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
