@@ -1,0 +1,9 @@
+# Use after weights and images have been provisioned, including on air-gapped hosts.
+networks:
+  setup:
+    internal: true
+services:
+  bootstrap:
+    environment:
+      HF_HUB_OFFLINE: "1"
+      HF_TOKEN: ""
