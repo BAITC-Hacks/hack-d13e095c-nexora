@@ -24,6 +24,11 @@ deadline_raw must be an exact substring of source_quote. Do not invent a deadlin
 For 'келесі <weekday>' / 'следующий <weekday>' use the named day of the following ISO week.
 Unqualified weekdays mean the nearest such weekday on or after the meeting date.
 An explicit month/day without a year uses the meeting year. Ambiguous deadlines must be null.
+For memory_objects extract only explicitly NAMED projects and identifiable documents mentioned in speech.
+Use the exact original name as a substring of the supporting verbatim source_quote, never create a name.
+Do not turn topics or generic words like 'проект', 'отчёт', 'договор' into named objects.
+A document mention is not an uploaded file. Set url=null unless a literal http(s) URL is present in the quote.
+Every object needs exact source_segment_ids. If no named projects or documents are mentioned, return [].
 Do not repeat the same assignment. An empty or uninformative transcript has empty tasks/decisions/topics.
 """
 

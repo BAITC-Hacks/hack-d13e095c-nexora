@@ -27,6 +27,9 @@ class Meeting(IdentityMixin, Base):
     topics: Mapped[list] = mapped_column(JSON, default=list)
     decisions: Mapped[list] = mapped_column(JSON, default=list)
     analysis_stale: Mapped[bool] = mapped_column(Boolean, default=True)
+    memory_analysis_version: Mapped[int] = mapped_column(Integer, default=0)
+    memory_attempted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    memory_error: Mapped[str | None] = mapped_column(String(100))
     analysis_version: Mapped[int] = mapped_column(Integer, default=0)
     error_code: Mapped[str | None] = mapped_column(String(100))
     updated_at: Mapped[datetime] = mapped_column(

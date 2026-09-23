@@ -167,6 +167,10 @@ class MeetingProcessor:
                             setattr(task, name, value)
             # Existing tasks are retained (including absent evidence on a subsequent LLM run).
             # analysis_version exposes older items for human review instead of deleting work.
+            from app.services.memory_extraction import persist_memory
+
+            await persist_memory(session, meeting_id, analyses, full=True)
+            meeting.memory_analysis_version, meeting.memory_error = version, None
             meeting.summary, meeting.topics, meeting.decisions = summary, topics, decisions
             meeting.analysis_stale, meeting.analysis_version = False, version
             self.jobs.succeed(meeting, job, MeetingStatus.COMPLETED)

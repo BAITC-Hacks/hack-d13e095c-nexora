@@ -1,4 +1,6 @@
 "use client";
+import { CorporateMemory } from "./memory-graph";
+import { Network } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import {
   conferenceApi,
@@ -280,7 +282,7 @@ export function ConferenceApp() {
           {[
             ["home", "Главная", Mic],
             ["meetings", "Конференции", Users],
-            ["recordings", "Записи", Headphones],
+            ["memory", "Память команды", Network],
             ["tasks", "Поручения", FileText],
             ["notices", "Напоминания", Bell],
           ].map(([id, label, Icon]) => {
@@ -307,38 +309,40 @@ export function ConferenceApp() {
         </span>
       </header>
       <main id="live-main" className="content live-home">
-        <div className="page-heading">
-          <div>
-            <h1>
-              {view === "home"
-                ? "Начнём встречу?"
-                : view === "tasks"
-                  ? "Поручения"
-                  : view === "notices"
-                    ? "Напоминания"
-                    : view === "recordings"
-                      ? "Записи встреч"
-                      : "Ваши конференции"}
-            </h1>
-            <p>
-              {view === "home"
-                ? "Пригласите коллег. Общайтесь. ИИ запишет главное."
-                : "Данные хранятся на сервере вашей команды."}
-            </p>
+        {view !== "memory" && (
+          <div className="page-heading">
+            <div>
+              <h1>
+                {view === "home"
+                  ? "Начнём встречу?"
+                  : view === "tasks"
+                    ? "Поручения"
+                    : view === "notices"
+                      ? "Напоминания"
+                      : view === "recordings"
+                        ? "Записи встреч"
+                        : "Ваши конференции"}
+              </h1>
+              <p>
+                {view === "home"
+                  ? "Пригласите коллег. Общайтесь. ИИ запишет главное."
+                  : "Данные хранятся на сервере вашей команды."}
+              </p>
+            </div>
+            {view !== "home" && (
+              <button
+                className="primary"
+                onClick={() => {
+                  setDialog("start");
+                  setError("");
+                }}
+              >
+                <Plus size={16} />
+                Новая конференция
+              </button>
+            )}
           </div>
-          {view !== "home" && (
-            <button
-              className="primary"
-              onClick={() => {
-                setDialog("start");
-                setError("");
-              }}
-            >
-              <Plus size={16} />
-              Новая конференция
-            </button>
-          )}
-        </div>
+        )}
         {error && !dialog && (
           <div className="live-error" role="alert">
             {error}
@@ -346,6 +350,18 @@ export function ConferenceApp() {
               <X size={16} />
             </button>
           </div>
+        )}
+        {view === "memory" && (
+          <CorporateMemory
+            openMeeting={(id) => {
+              const own = sessions.find((s) => s.id === id);
+              if (own) open(own);
+              else
+                setError(
+                  "Обсуждение доступно в общей карте. Для входа в звонок попросите ссылку приглашения у организатора.",
+                );
+            }}
+          />
         )}
         {view === "home" && (
           <>

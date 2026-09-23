@@ -251,6 +251,10 @@ class LiveProcessor:
                 meeting.decisions = (
                     decisions if full else list(dict.fromkeys(meeting.decisions + decisions))
                 )
+                from app.services.memory_extraction import persist_memory
+
+                await persist_memory(session, room_id, analyses, full=full)
+                meeting.memory_analysis_version, meeting.memory_error = version, None
                 meeting.analysis_version = version
                 if room.ended_at and room.baseline_tasks is not None:
                     from app.services.briefing_service import freeze_tasks
@@ -291,6 +295,9 @@ async def main():
     from app.services.briefing_service import BriefingProcessor
 
     briefings = BriefingProcessor(factory, settings)
+    from app.services.memory_extraction import MemoryBackfill
+
+    memory = MemoryBackfill(factory, settings)
     settings.storage_dir.mkdir(parents=True, exist_ok=True)
 
     async def loop(operation, interval):
@@ -310,6 +317,7 @@ async def main():
             loop(processor.speech_once, 0.3),
             loop(processor.analysis_once, 3),
             loop(briefings.once, 1),
+            loop(memory.once, 5),
             loop(heartbeat, 5),
         )
     finally:

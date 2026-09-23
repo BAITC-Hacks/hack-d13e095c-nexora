@@ -25,8 +25,18 @@ class SupportedDecision(Schema):
     source_quote: str = Field(min_length=1, max_length=4000)
 
 
+class MemoryObject(Schema):
+    kind: Literal["project", "document"]
+    name: str = Field(min_length=2, max_length=200)
+    source_segment_ids: list[int] = Field(min_length=1, max_length=20)
+    source_quote: str = Field(min_length=1, max_length=4000)
+    url: str | None = Field(default=None, max_length=2000)
+
+
 class MeetingAnalysis(Schema):
     summary: str = Field(max_length=10000)
     topics: list[str] = Field(max_length=30)
     decisions: list[SupportedDecision] = Field(max_length=100)
     tasks: list[ExtractedTask] = Field(max_length=200)
+
+    memory_objects: list[MemoryObject] = Field(default_factory=list, max_length=40)

@@ -50,6 +50,7 @@ class Settings(BaseSettings):
     speech_api_key: str = ""
     speech_timeout_seconds: int = Field(default=120, ge=5, le=600)
     live_analysis_interval: int = Field(default=30, ge=10, le=300)
+    memory_access_key: str | None = None
     ollama_keep_alive: str = "5m"
     cors_origins: list[str] = ["http://localhost:3000", "http://localhost:5173"]
     pdf_font_path: Path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")

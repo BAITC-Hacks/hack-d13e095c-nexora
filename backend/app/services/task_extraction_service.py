@@ -1,6 +1,7 @@
 import hashlib
 import re
 from datetime import datetime
+from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from app.config import Settings
@@ -122,6 +123,38 @@ class TaskExtractionService:
             validated.append(task)
         analysis.tasks = validated
         analysis.decisions = [item for item in analysis.decisions if evidence(item)]
+        memory = []
+        for item in analysis.memory_objects:
+            if not evidence(item) or normalized(item.name) not in normalized(item.source_quote):
+                continue
+            if normalized(item.name) in {
+                "проект",
+                "project",
+                "документ",
+                "document",
+                "отчёт",
+                "отчет",
+                "договор",
+                "протокол",
+                "жоба",
+                "құжат",
+            }:
+                continue
+            if item.url:
+                try:
+                    parsed = urlsplit(item.url)
+                    safe = (
+                        parsed.scheme in {"http", "https"}
+                        and parsed.hostname
+                        and not parsed.username
+                        and not parsed.password
+                    )
+                except ValueError:
+                    safe = False
+                if not safe or item.url not in item.source_quote:
+                    item.url = None
+            memory.append(item)
+        analysis.memory_objects = memory
         return analysis
 
     async def extract(

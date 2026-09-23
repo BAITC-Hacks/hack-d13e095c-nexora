@@ -9,6 +9,7 @@ from starlette.datastructures import Headers
 from app.api.router import router
 from app.api.conferences import router as conference_router
 from app.api.briefings import router as briefing_router
+from app.api.memory import router as memory_router
 from app.services.conference_service import ConferenceHub
 from app.config import Settings, get_settings
 from app.db.session import create_database
@@ -79,6 +80,7 @@ def create_app(settings: Settings | None = None, session_factory=None) -> FastAP
         allow_headers=["Content-Type", "X-API-Key"],
     )
     app.include_router(router)
+    app.include_router(memory_router)
     app.include_router(conference_router)
     app.include_router(briefing_router)
 

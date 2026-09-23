@@ -25,3 +25,8 @@ Product name: Протокол. User requests the familiar interface and workflo
 
 ## Pre-meeting change briefing
 What Changed? links an explicitly selected previous completed meeting to a follow-up. Hosts of both rooms authorize sharing short evidence quotes with new participants. The worker combines deterministic newly overdue assignments with local-model-supported new risks, changed decisions and unresolved questions. Host notes supply events outside the system. At most five items and 60 main-text words target 30 seconds of reading. Empty, stale, incomplete and model-error states are explicit; historical task state is never retroactively invented. Calls do not wait for the briefing.
+
+## Corporate Memory Graph
+The user confirmed a shared all-team map across saved meetings, with projects and document mentions extracted by local Ollama. Seven object kinds connect people, tasks, projects, decisions, deadlines, documents, and meetings to source quotations. Project/document names group only by exact normalized name (case and excess whitespace); people with the same name remain separate meeting identities. Documents mentioned in speech are not uploaded files. AI extraction requires source support and can be incomplete or unavailable.
+
+Read access to all saved meeting discussions is controlled by the shared `MEMORY_ACCESS_KEY`, falling back to `CONFERENCE_ACCESS_KEY`; if both are empty, anyone able to reach the site can read the map. This access does not grant call entry or editing rights. Calls still require their invitations/credentials. The UI must make the all-team sharing scope explicit and retain source, archive, partial-coverage, indexing, and error notices.

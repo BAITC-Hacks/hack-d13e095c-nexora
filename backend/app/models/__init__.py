@@ -9,3 +9,5 @@ from app.models.transcript import TranscriptSegment
 __all__ = ["Job", "Meeting", "Participant", "Speaker", "Task", "TranscriptSegment"]
 
 from app.models.briefing import ConferenceBriefing  # noqa: F401
+
+from app.models.memory import MemoryOccurrence  # noqa: F401
