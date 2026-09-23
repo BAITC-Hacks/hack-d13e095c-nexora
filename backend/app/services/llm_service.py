@@ -49,8 +49,11 @@ class LLMService:
         return f"http://{host}:{port}", parsed.netloc
 
     async def analyze(self, context: dict) -> MeetingAnalysis:
+        return await self.structured(context, MeetingAnalysis, SYSTEM_PROMPT)
+
+    async def structured(self, context: dict, result_type, prompt: str):
         origin, host = await self._local_origin()
-        schema = MeetingAnalysis.model_json_schema()
+        schema = result_type.model_json_schema()
         payload = {
             "model": self.settings.ollama_model,
             "stream": False,
@@ -65,7 +68,7 @@ class LLMService:
             "messages": [
                 {
                     "role": "system",
-                    "content": SYSTEM_PROMPT + "\nJSON_SCHEMA=" + json.dumps(schema),
+                    "content": prompt + "\nJSON_SCHEMA=" + json.dumps(schema),
                 },
                 {"role": "user", "content": json.dumps(context, ensure_ascii=False)},
             ],
@@ -103,7 +106,7 @@ class LLMService:
                         raise ValueError("Truncated model output")
                     if body.get("prompt_eval_count", 0) >= self.settings.llm_context_tokens - 4096:
                         raise PipelineError("LLM_CONTEXT_LIMIT")
-                    return MeetingAnalysis.model_validate_json(body["message"]["content"])
+                    return result_type.model_validate_json(body["message"]["content"])
                 except (httpx.HTTPError, ValidationError, ValueError, KeyError, TypeError) as exc:
                     if attempt == 2:
                         raise PipelineError("OLLAMA_ANALYSIS_FAILED") from exc

@@ -7,3 +7,5 @@ from app.models.task import Task
 from app.models.transcript import TranscriptSegment
 
 __all__ = ["Job", "Meeting", "Participant", "Speaker", "Task", "TranscriptSegment"]
+
+from app.models.briefing import ConferenceBriefing  # noqa: F401

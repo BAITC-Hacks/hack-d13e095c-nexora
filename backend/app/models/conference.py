@@ -1,7 +1,17 @@
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import (
+    JSON,
+    Boolean,
+    DateTime,
+    Float,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base, IdentityMixin
@@ -12,6 +22,7 @@ class Conference(IdentityMixin, Base):
     id: Mapped[UUID] = mapped_column(
         ForeignKey("meetings.id", ondelete="CASCADE"), primary_key=True
     )
+    baseline_tasks: Mapped[list | None] = mapped_column(JSON)
     invite_hash: Mapped[str] = mapped_column(String(64))
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     recording: Mapped[bool] = mapped_column(Boolean, default=False)

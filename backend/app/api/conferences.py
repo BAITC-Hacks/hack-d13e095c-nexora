@@ -51,6 +51,10 @@ class CreateRoom(BaseModel):
     name: str = Field(min_length=1, max_length=100)
     consent: Literal[True]
     scheduled_at: AwareDatetime | None = None
+    previous_room_id: UUID | None = None
+    previous_room_token: str | None = Field(default=None, max_length=100, repr=False)
+    since_last_call: str = Field(default="", max_length=2000)
+    share_previous_briefing: bool = False
 
 
 class JoinRoom(BaseModel):
@@ -119,6 +123,21 @@ async def create_room(
     session.add(room)
     await session.flush()
     member, token = await add_member(session, room_id, body.name, True)
+    if body.previous_room_id:
+        from app.api.briefings import BriefingSetup, configure
+
+        if not body.previous_room_token:
+            raise HTTPException(422, "Нет доступа к предыдущей встрече")
+        await configure(
+            session,
+            room,
+            BriefingSetup(
+                previous_id=body.previous_room_id,
+                previous_token=body.previous_room_token,
+                updates=body.since_last_call,
+                share_with_participants=body.share_previous_briefing,
+            ),
+        )
     await session.commit()
     return {
         "token": token,
@@ -209,7 +228,11 @@ async def recording(
 @router.post("/{room_id}/end")
 async def end_room(room_id: UUID, token: Token, session: Session, request: Request):
     room, member = await authorize(session, room_id, token, host=True)
-    room.ended_at = room.ended_at or utcnow()
+    if room.ended_at is None:
+        from app.services.briefing_service import freeze_tasks
+
+        room.ended_at = utcnow()
+        await freeze_tasks(session, room)
     room.recording = False
     room.recording_stopped_at = room.ended_at
     room.analysis_requested = True

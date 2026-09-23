@@ -252,6 +252,11 @@ class LiveProcessor:
                     decisions if full else list(dict.fromkeys(meeting.decisions + decisions))
                 )
                 meeting.analysis_version = version
+                if room.ended_at and room.baseline_tasks is not None:
+                    from app.services.briefing_service import freeze_tasks
+
+                    await session.flush()
+                    await freeze_tasks(session, room)
                 actual_latest = await session.scalar(
                     select(func.max(TranscriptSegment.ordinal)).where(
                         TranscriptSegment.meeting_id == room_id
@@ -283,6 +288,9 @@ async def main():
     settings = get_settings()
     engine, factory = create_database(settings)
     processor = LiveProcessor(factory, settings)
+    from app.services.briefing_service import BriefingProcessor
+
+    briefings = BriefingProcessor(factory, settings)
     settings.storage_dir.mkdir(parents=True, exist_ok=True)
 
     async def loop(operation, interval):
@@ -299,7 +307,10 @@ async def main():
 
     try:
         await asyncio.gather(
-            loop(processor.speech_once, 0.3), loop(processor.analysis_once, 3), loop(heartbeat, 5)
+            loop(processor.speech_once, 0.3),
+            loop(processor.analysis_once, 3),
+            loop(briefings.once, 1),
+            loop(heartbeat, 5),
         )
     finally:
         await engine.dispose()

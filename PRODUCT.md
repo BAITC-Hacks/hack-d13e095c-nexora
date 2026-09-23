@@ -22,3 +22,6 @@ Product name: Протокол. User requests the familiar interface and workflo
 - Make recording state and the stop action unmistakable.
 - Keep all existing recording, document and task functions available.
 - Show real service errors and empty states; never substitute generated sample data.
+
+## Pre-meeting change briefing
+What Changed? links an explicitly selected previous completed meeting to a follow-up. Hosts of both rooms authorize sharing short evidence quotes with new participants. The worker combines deterministic newly overdue assignments with local-model-supported new risks, changed decisions and unresolved questions. Host notes supply events outside the system. At most five items and 60 main-text words target 30 seconds of reading. Empty, stale, incomplete and model-error states are explicit; historical task state is never retroactively invented. Calls do not wait for the briefing.

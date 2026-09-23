@@ -1,4 +1,5 @@
 "use client";
+import { WhatChanged } from "./what-changed";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   conferenceApi,
@@ -562,6 +563,12 @@ export function ConferenceRoom({
             настройки серверов; аудио останется в очереди.
           </div>
         )}
+      <WhatChanged
+        session={session}
+        host={room.is_host}
+        ended={!!room.ended_at}
+        inCall={inCall}
+      />
       <div
         className={"live-recording-banner " + (room.recording ? "on" : "")}
         role="status"

@@ -1,0 +1,149 @@
+.what-changed {
+  background: #fff;
+  border: 1px solid #e3e6ec;
+  border-radius: 12px;
+  margin: 0 0 20px;
+  padding: 24px;
+  color: #24272d;
+}
+.what-changed > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.what-changed h2 {
+  font-size: 20px;
+  font-weight: 650;
+  margin: 0 0 4px;
+}
+.what-changed > header p,
+.briefing-hint,
+.briefing-since {
+  color: #626a78;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.what-changed > p {
+  margin: 12px 0;
+  line-height: 1.6;
+}
+.what-changed > .text-link {
+  margin-top: 14px;
+}
+.briefing-items {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 24px;
+}
+.briefing-items li {
+  min-width: 0;
+  border-top: 1px solid #e3e6ec;
+  padding-top: 16px;
+}
+.briefing-items p {
+  margin: 8px 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.briefing-category {
+  font-size: 12px;
+  font-weight: 650;
+  color: #1e55c5;
+}
+.briefing-category.deadline,
+.briefing-category.risk {
+  color: #b42332;
+}
+.what-changed details {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.what-changed summary {
+  cursor: pointer;
+  color: #1e55c5;
+  padding: 8px 0;
+}
+.what-changed blockquote {
+  margin: 8px 0 16px;
+  padding: 12px;
+  background: #f7f8fa;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+.what-changed blockquote span {
+  font-size: 12px;
+  color: #626a78;
+}
+.briefing-coverage {
+  margin: 12px 0;
+}
+.briefing-coverage ul {
+  list-style: disc;
+  padding-left: 22px;
+  color: #626a78;
+}
+.briefing-form,
+.briefing-create {
+  display: grid;
+  gap: 14px;
+}
+.briefing-create {
+  border: 0;
+  border-top: 1px solid #e3e6ec;
+  padding: 16px 0 0;
+  min-width: 0;
+}
+.briefing-create legend {
+  font-size: 13px;
+  font-weight: 650;
+  padding-right: 8px;
+}
+.briefing-form {
+  max-width: 680px;
+  margin-top: 16px;
+}
+.briefing-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+.briefing-form textarea,
+.briefing-form select,
+.briefing-create textarea,
+.briefing-create select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #cdd2dc;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+  color: #24272d;
+}
+.briefing-form textarea,
+.briefing-create textarea {
+  resize: vertical;
+  min-height: 88px;
+}
+.briefing-form .live-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+@media (max-width: 600px) {
+  .what-changed {
+    padding: 18px;
+  }
+  .what-changed > header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .briefing-items {
+    gap: 16px;
+  }
+}

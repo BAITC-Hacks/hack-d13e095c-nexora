@@ -8,6 +8,7 @@ from starlette.datastructures import Headers
 
 from app.api.router import router
 from app.api.conferences import router as conference_router
+from app.api.briefings import router as briefing_router
 from app.services.conference_service import ConferenceHub
 from app.config import Settings, get_settings
 from app.db.session import create_database
@@ -74,11 +75,12 @@ def create_app(settings: Settings | None = None, session_factory=None) -> FastAP
         CORSMiddleware,
         allow_origins=settings.cors_origins,
         allow_credentials=False,
-        allow_methods=["GET", "POST", "PATCH", "DELETE"],
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
         allow_headers=["Content-Type", "X-API-Key"],
     )
     app.include_router(router)
     app.include_router(conference_router)
+    app.include_router(briefing_router)
 
     @app.exception_handler(IntegrityError)
     async def integrity_error(request, exc):

@@ -35,6 +35,7 @@ export function ConferenceApp() {
     [current, setCurrent] = useState<RoomSession | null>(null),
     [view, setView] = useState("home"),
     [dialog, setDialog] = useState<"start" | "schedule" | "join" | null>(null),
+    [previousId, setPreviousId] = useState(""),
     [invitation, setInvitation] = useState<Invitation | null>(null),
     [name, setName] = useState(""),
     [error, setError] = useState(""),
@@ -198,6 +199,11 @@ export function ConferenceApp() {
             title: String(data.get("title") || "").trim(),
             name: person,
             consent,
+            previous_room_id: previousId || null,
+            previous_room_token:
+              sessions.find((s) => s.id === previousId)?.token || null,
+            since_last_call: String(data.get("sinceLastCall") || ""),
+            share_previous_briefing: data.get("sharePrevious") === "on",
             scheduled_at: data.get("date")
               ? new Date(String(data.get("date"))).toISOString()
               : null,
@@ -217,6 +223,7 @@ export function ConferenceApp() {
       remember(session);
       update(result.room);
       setDialog(null);
+      setPreviousId("");
       setInvitation(null);
       open(session);
     } catch (e) {
@@ -588,6 +595,62 @@ export function ConferenceApp() {
                   defaultValue={`Совещание ${new Date().toLocaleDateString("ru-RU")}`}
                 />
               </label>
+            )}
+            {dialog !== "join" && (
+              <fieldset className="briefing-create">
+                <legend>Что изменилось? · 30 секунд чтения</legend>
+                <label>
+                  Сравнить с прошлым созвоном
+                  <select
+                    value={previousId}
+                    onChange={(e) => setPreviousId(e.target.value)}
+                  >
+                    <option value="">Новая тема — без сравнения</option>
+                    {sessions
+                      .filter(
+                        (s) =>
+                          snapshots[s.id]?.is_host && snapshots[s.id]?.ended_at,
+                      )
+                      .map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.title} ·{" "}
+                          {new Date(snapshots[s.id].date).toLocaleDateString(
+                            "ru-RU",
+                          )}
+                        </option>
+                      ))}
+                  </select>
+                </label>
+                {previousId ? (
+                  <>
+                    <label>
+                      Что произошло после созвона?{" "}
+                      <span className="briefing-hint">
+                        Необязательно: новые риски, принятые изменения, ответы
+                        на вопросы.
+                      </span>
+                      <textarea
+                        name="sinceLastCall"
+                        rows={3}
+                        maxLength={2000}
+                        placeholder="Добавьте факты, о которых ещё не говорили в приложении"
+                      />
+                    </label>
+                    <label className="live-consent">
+                      <input type="checkbox" name="sharePrevious" required />
+                      <span>
+                        Показать участникам новой встречи сводку и цитаты из
+                        выбранного созвона.
+                      </span>
+                    </label>
+                  </>
+                ) : (
+                  <p className="briefing-hint">
+                    Доступны завершённые встречи, где вы организатор. Для первой
+                    встречи сравнение не требуется.
+                  </p>
+                )}
+              </fieldset>
             )}
             {dialog === "schedule" && (
               <label>

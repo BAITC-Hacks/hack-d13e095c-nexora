@@ -707,7 +707,10 @@
   font-size: 12px;
   line-height: 1.6;
 }
-.live-consent input {
+.live-consent input[type="checkbox"] {
+  padding: 0;
+  min-width: 17px;
+  flex-basis: 17px;
   width: 17px;
   height: 17px;
   flex-shrink: 0;
@@ -856,3 +859,5 @@
     padding: 18px;
   }
 }
+
+.live-consent > span { min-width: 0; flex: 1; }
